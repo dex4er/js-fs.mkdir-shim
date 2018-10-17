@@ -27,6 +27,13 @@ const mkdir = require('fs.mkdir-shim');
 // Use `mkdir` just like the built-in method on `fs`
 ```
 
+_Typescript:_
+
+```ts
+import mkdir from 'fs.mkdir-shim';
+// Use `mkdir` just like the built-in method on `fs`
+```
+
 ### Shim
 
 ```js
@@ -42,5 +49,24 @@ or:
 require('fs.mkdir-shim/auto');
 // `fs.mkdir` is now defined
 const fs = require('fs');
+// Use `fs.mkdir`
+```
+
+_Typescript:_
+
+```js
+import mkdirShim from 'fs.mkdir-shim/shim';
+mkdirShim();
+// `fs.mkdir` is now defined
+import fs from 'fs';
+// Use `fs.mkdir`
+```
+
+or:
+
+```js
+import 'fs.mkdir-shim/auto';
+// `fs.mkdir` is now defined
+import fs from 'fs';
 // Use `fs.mkdir`
 ```

@@ -1,0 +1,15 @@
+{
+  "extends": [
+    "tslint:recommended"
+  ],
+  "rules": {
+    "max-line-length": false, // looooong lines are not a problem with good text editor
+    "no-namespace": false, // be compatible with older versions of Typescript
+    "typedef": [ // types are mandatory
+      true,
+      "call-signature",
+      "parameter",
+      "property-declaration"
+    ]
+  }
+}
