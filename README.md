@@ -15,7 +15,7 @@ and a replacement in other environments.
 This module requires Node >= 4.
 
 This package implements the [es-shim API](https://github.com/es-shims/api)
-interface. It works in an ES5-supported environment and complies with the
+interface. It works in an ES6-supported environment and complies with the
 [spec](http://www.ecma-international.org/ecma-262/6.0/).
 
 ## Usage
