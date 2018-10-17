@@ -12,7 +12,6 @@
     "fs",
     "fs.mkdir",
     "mkdir",
-    "pipeline",
     "polyfill"
   ],
   "author": "Piotr Roszatycki <piotr.roszatycki@gmail.com>",
