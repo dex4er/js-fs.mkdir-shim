@@ -12,6 +12,9 @@ node v10.12.0 added support for a recursive option for `fs.mkdir`:
 This package provides the built-in `fs.mkdir` in node v10.12.0 and later,
 and a replacement in other environments.
 
+The replacement uses [`make-dir`](https://www.npmjs.com/package/make-dir)
+module.
+
 This module requires Node >= 4.
 
 This package implements the [es-shim API](https://github.com/es-shims/api)

@@ -3,11 +3,15 @@
 const implementation = require('./implementation');
 
 const fs = require('fs');
-const semver = require('semver');
 
 module.exports = function getPolyfill () {
-  if (semver.gte(process.version, '10.12.0')) {
-    return fs.mkdir;
+  // heuristic: new mkdir validates `recursive` option
+  try {
+    fs.mkdir('.', { recursive: 0 }, () => { /* ignore */ });
+  } catch (e) {
+    if (e.code === 'ERR_INVALID_ARG_TYPE') {
+      return fs.mkdir;
+    }
   }
   return implementation;
 };
