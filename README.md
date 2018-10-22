@@ -90,6 +90,6 @@ import fs from 'fs';
 
 ## License
 
-Copyright (c) 2016-2018 Piotr Roszatycki <piotr.roszatycki@gmail.com>
+Copyright (c) 2018 Piotr Roszatycki <piotr.roszatycki@gmail.com>
 
 [MIT](https://opensource.org/licenses/MIT)
