@@ -15,11 +15,25 @@ and a replacement in other environments.
 The replacement uses [`make-dir`](https://www.npmjs.com/package/make-dir)
 module.
 
+## Requirements
+
 This module requires Node >= 4.
 
 This package implements the [es-shim API](https://github.com/es-shims/api)
 interface. It works in an ES6-supported environment and complies with the
 [spec](http://www.ecma-international.org/ecma-262/6.0/).
+
+## Installation
+
+```shell
+npm install fs.mkdir-shim
+```
+
+_Additionally for Typescript:_
+
+```shell
+npm install -D @types/node
+```
 
 ## Usage
 
@@ -73,3 +87,9 @@ import 'fs.mkdir-shim/auto';
 import fs from 'fs';
 // Use `fs.mkdir`
 ```
+
+## License
+
+Copyright (c) 2016-2018 Piotr Roszatycki <piotr.roszatycki@gmail.com>
+
+[MIT](https://opensource.org/licenses/MIT)
