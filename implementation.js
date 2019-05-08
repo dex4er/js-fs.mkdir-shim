@@ -5,7 +5,7 @@ const makeDir = require('make-dir');
 
 const mkdirOrig = fs.mkdir && typeof fs.mkdir.orig === 'function' ? fs.mkdir.orig : fs.mkdir;
 
-function mkdir (path, options, callback) {
+function mkdir(path, options, callback) {
   let mode = 0o777;
   let recursive = false;
 
@@ -25,7 +25,9 @@ function mkdir (path, options, callback) {
     throw err;
   }
   if (recursive) {
-    makeDir(path, { mode: mode }).then(() => callback()).catch((err) => callback(err));
+    makeDir(path, {mode: mode})
+      .then(() => callback())
+      .catch(err => callback(err));
   } else {
     mkdirOrig(path, mode, callback);
   }

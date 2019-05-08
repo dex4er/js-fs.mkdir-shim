@@ -1,6 +1,6 @@
 {
   "name": "fs.mkdir-shim",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "Polyfill/shim for fs.mkdir in node versions < v10.12",
   "main": "index.js",
   "typings": "index.d.ts",
@@ -29,19 +29,19 @@
     "@es-shims/api": "^2.1.2",
     "@types/node": "^12.0.0",
     "eslint": "^5.16.0",
-    "eslint-config-semistandard": "^13.0.0",
-    "eslint-config-standard": "^12.0.0",
+    "eslint-config-prettier": "^4.2.0",
     "eslint-plugin-import": "^2.17.2",
     "eslint-plugin-node": "^9.0.1",
-    "eslint-plugin-standard": "^4.0.0",
     "markdownlint-cli": "^0.15.0",
-    "semistandard": "^13.0.1",
+    "prettier": "^1.17.0",
     "tslint": "^5.16.0",
-    "typescript": "^3.4.5"
+    "tslint-config-prettier": "^1.18.0",
+    "typescript": "^3.4.5",
+    "util.promisify": "^1.0.0"
   },
   "scripts": {
     "postpublish": "git tag v$npm_package_version -a -m \"Release v$npm_package_version\" && git push --tags",
-    "pretest": "eslint . && tsc --pretty -p . && tslint *.d.ts && markdownlint *.md && es-shim-api --bound",
+    "pretest": "eslint . && tsc --pretty -p . && tslint *.d.ts && npx prettier --ignore-path .gitignore --list-different '**/*.ts' '**/*.js' '**/*.json' '**/*.yml' && markdownlint *.md && es-shim-api --bound",
     "test": "npm run test:spec",
     "test:spec": "node test"
   }

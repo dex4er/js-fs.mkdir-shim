@@ -1,5 +1,5 @@
 /// <reference types="node" />
 
-import getPolyfill = require("./polyfill");
+import getPolyfill = require('./polyfill');
 
 export = getPolyfill;

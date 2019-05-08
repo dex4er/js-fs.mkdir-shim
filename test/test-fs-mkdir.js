@@ -13,7 +13,7 @@ const tmpdir = require('./tmpdir');
 tmpdir.refresh();
 
 let dirc = 0;
-function nextdir () {
+function nextdir() {
   return `test${++dirc}`;
 }
 
@@ -21,45 +21,60 @@ function nextdir () {
 {
   const pathname = path.join(tmpdir.path, nextdir());
 
-  mkdir(pathname, common.mustCall((err) => {
-    assert.equal(err, null);
-    assert.equal(fs.existsSync(pathname), true);
-  }));
+  mkdir(
+    pathname,
+    common.mustCall(err => {
+      assert.equal(err, null);
+      assert.equal(fs.existsSync(pathname), true);
+    })
+  );
 }
 
 // mkdir creates directory with assigned mode value
 {
   const pathname = path.join(tmpdir.path, nextdir());
 
-  mkdir(pathname, 0o777, common.mustCall((err) => {
-    assert.equal(err, null);
-    assert.equal(fs.existsSync(pathname), true);
-  }));
+  mkdir(
+    pathname,
+    0o777,
+    common.mustCall(err => {
+      assert.equal(err, null);
+      assert.equal(fs.existsSync(pathname), true);
+    })
+  );
 }
 
 // mkdirp when folder does not yet exist.
 {
   const pathname = path.join(tmpdir.path, nextdir(), nextdir());
 
-  mkdir(pathname, { recursive: true }, common.mustCall((err) => {
-    assert.equal(err, null);
-    assert.equal(fs.existsSync(pathname), true);
-    assert.equal(fs.statSync(pathname).isDirectory(), true);
-  }));
+  mkdir(
+    pathname,
+    {recursive: true},
+    common.mustCall(err => {
+      assert.equal(err, null);
+      assert.equal(fs.existsSync(pathname), true);
+      assert.equal(fs.statSync(pathname).isDirectory(), true);
+    })
+  );
 }
 
 // mkdirp when path is a file.
 {
   const pathname = path.join(tmpdir.path, nextdir(), nextdir());
 
-  mkdir(path.dirname(pathname), (err) => {
+  mkdir(path.dirname(pathname), err => {
     assert.equal(err, null);
     fs.writeFileSync(pathname, '', 'utf8');
-    mkdir(pathname, { recursive: true }, common.mustCall((err) => {
-      assert.equal(err.code, 'EEXIST');
-      assert.equal(err.syscall, 'mkdir');
-      assert.equal(fs.statSync(pathname).isDirectory(), false);
-    }));
+    mkdir(
+      pathname,
+      {recursive: true},
+      common.mustCall(err => {
+        assert.equal(err.code, 'EEXIST');
+        assert.equal(err.syscall, 'mkdir');
+        assert.equal(fs.statSync(pathname).isDirectory(), false);
+      })
+    );
   });
 }
 
@@ -67,16 +82,12 @@ function nextdir () {
 // Anything else generates an error.
 {
   const pathname = path.join(tmpdir.path, nextdir());
-  ['', 1, {}, [], null, Symbol('test'), () => {}].forEach((recursive) => {
-    common.expectsError(
-      () => mkdir(pathname, { recursive }, common.mustNotCall()),
-      {
-        code: 'ERR_INVALID_ARG_TYPE',
-        type: TypeError,
-        message: 'The "recursive" argument must be of type boolean. Received ' +
-          `type ${typeof recursive}`
-      }
-    );
+  ['', 1, {}, [], null, Symbol('test'), () => {}].forEach(recursive => {
+    common.expectsError(() => mkdir(pathname, {recursive}, common.mustNotCall()), {
+      code: 'ERR_INVALID_ARG_TYPE',
+      type: TypeError,
+      message: 'The "recursive" argument must be of type boolean. Received ' + `type ${typeof recursive}`
+    });
   });
 }
 

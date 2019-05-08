@@ -8,7 +8,7 @@ const shim = require('./shim');
 const define = require('define-properties');
 const fsModule = require('fs');
 
-const boundMkdir = function mkdir () {
+const boundMkdir = function mkdir() {
   return polyfill.apply(fsModule, arguments);
 };
 define(boundMkdir, {

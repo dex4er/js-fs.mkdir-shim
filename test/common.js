@@ -5,11 +5,11 @@
 const assert = require('assert');
 const util = require('util');
 
-function noop () {}
+function noop() {}
 
 const mustCallChecks = [];
 
-function isDeepEqual (actual, expected) {
+function isDeepEqual(actual, expected) {
   try {
     assert.deepEqual(actual, expected);
     return true;
@@ -18,10 +18,10 @@ function isDeepEqual (actual, expected) {
   }
 }
 
-function runCallChecks (exitCode) {
+function runCallChecks(exitCode) {
   if (exitCode !== 0) return;
 
-  const failed = mustCallChecks.filter(function (context) {
+  const failed = mustCallChecks.filter(function(context) {
     if ('minimum' in context) {
       context.messageSegment = 'at least ' + context.minimum;
       return context.actual < context.minimum;
@@ -31,21 +31,30 @@ function runCallChecks (exitCode) {
     }
   });
 
-  failed.forEach(function (context) {
-    console.log('Mismatched %s function calls. Expected %s, actual %d.',
+  failed.forEach(function(context) {
+    console.log(
+      'Mismatched %s function calls. Expected %s, actual %d.',
       context.name,
       context.messageSegment,
-      context.actual);
-    console.log(context.stack.split('\n').slice(2).join('\n'));
+      context.actual
+    );
+    console.log(
+      context.stack
+        .split('\n')
+        .slice(2)
+        .join('\n')
+    );
   });
 
   if (failed.length) process.exit(1);
 }
 
-function _mustCallInner (fn, criteria, field) {
+function _mustCallInner(fn, criteria, field) {
   criteria = criteria || 1;
 
-  if (process._exiting) { throw new Error('Cannot use common.mustCall*() in process exit handler'); }
+  if (process._exiting) {
+    throw new Error('Cannot use common.mustCall*() in process exit handler');
+  }
   if (typeof fn === 'number') {
     criteria = fn;
     fn = noop;
@@ -53,12 +62,14 @@ function _mustCallInner (fn, criteria, field) {
     fn = noop;
   }
 
-  if (typeof criteria !== 'number') { throw new TypeError(`Invalid ${field} value: ${criteria}`); }
+  if (typeof criteria !== 'number') {
+    throw new TypeError(`Invalid ${field} value: ${criteria}`);
+  }
 
   const context = {
     [field]: criteria,
     actual: 0,
-    stack: (new Error()).stack,
+    stack: new Error().stack,
     name: fn.name || '<anonymous>'
   };
 
@@ -67,29 +78,31 @@ function _mustCallInner (fn, criteria, field) {
 
   mustCallChecks.push(context);
 
-  return function () {
+  return function() {
     context.actual++;
     return fn.apply(this, arguments);
   };
 }
 
 class Comparison {
-  constructor (obj, keys) {
+  constructor(obj, keys) {
     for (const key of keys) {
-      if (key in obj) { this[key] = obj[key]; }
+      if (key in obj) {
+        this[key] = obj[key];
+      }
     }
   }
 }
 
 // Useful for testing expected internal/error objects
-function expectsError (fn, settings, exact) {
+function expectsError(fn, settings, exact) {
   if (typeof fn !== 'function') {
     exact = settings;
     settings = fn;
     fn = undefined;
   }
 
-  function innerFn (error) {
+  function innerFn(error) {
     if (arguments.length !== 1) {
       // Do not use `assert.strictEqual()` to prevent `util.inspect` from
       // always being called.
@@ -110,15 +123,14 @@ function expectsError (fn, settings, exact) {
         constructor = Object.getPrototypeOf(error.constructor);
       }
       // Add the `type` to the error to properly compare and visualize it.
-      if (!('type' in error)) { error.type = constructor; }
+      if (!('type' in error)) {
+        error.type = constructor;
+      }
     }
 
-    if ('message' in settings &&
-        typeof settings.message === 'object' &&
-        settings.message.test(error.message)) {
+    if ('message' in settings && typeof settings.message === 'object' && settings.message.test(error.message)) {
       // Make a copy so we are able to modify the settings.
-      innerSettings = Object.create(
-        settings, Object.getOwnPropertyDescriptors(settings));
+      innerSettings = Object.create(settings, Object.getOwnPropertyDescriptors(settings));
       // Visualize the message as identical in case of other errors.
       innerSettings.message = error.message;
     }
@@ -158,14 +170,13 @@ function expectsError (fn, settings, exact) {
   return mustCall(innerFn, exact);
 }
 
-function mustCall (fn, exact) {
+function mustCall(fn, exact) {
   return _mustCallInner(fn, exact, 'exact');
 }
 
-function getCallSite (top) {
+function getCallSite(top) {
   const originalStackFormatter = Error.prepareStackTrace;
-  Error.prepareStackTrace = (_err, stack) =>
-    `${stack[0].getFileName()}:${stack[0].getLineNumber()}`;
+  Error.prepareStackTrace = (_err, stack) => `${stack[0].getFileName()}:${stack[0].getLineNumber()}`;
   const err = new Error();
   Error.captureStackTrace(err, top);
   // with the V8 Error API, the stack is not formatted until it is accessed
@@ -174,11 +185,10 @@ function getCallSite (top) {
   return err.stack;
 }
 
-function mustNotCall (msg) {
+function mustNotCall(msg) {
   const callSite = getCallSite(mustNotCall);
-  return function mustNotCall () {
-    assert.fail(
-      `${msg || 'function should not have been called'} at ${callSite}`);
+  return function mustNotCall() {
+    assert.fail(`${msg || 'function should not have been called'} at ${callSite}`);
   };
 }
 

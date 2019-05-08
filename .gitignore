@@ -3,10 +3,9 @@
 *.log
 *.tgz
 
-/.tmp
-
 /coverage/
 /node_modules/
+/.tmp
 
 /.nyc_output/
 
@@ -15,5 +14,6 @@
 
 /package-lock.json
 
+.DS_Store
 /.idea
 /.vscode
