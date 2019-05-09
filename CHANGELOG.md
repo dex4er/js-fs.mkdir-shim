@@ -1,6 +1,6 @@
 # Changelog
 
-## v1.1.0 2019-05-08
+## v1.1.0 2019-05-09
 
 * Based on typings for Node v12.
 
