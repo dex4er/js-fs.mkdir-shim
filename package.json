@@ -33,7 +33,7 @@
     "eslint-plugin-import": "^2.18.2",
     "eslint-plugin-node": "^10.0.0",
     "markdownlint-cli": "^0.18.0",
-    "prettier": "^1.18.2",
+    "prettier": "^2.1.2",
     "tslint": "^5.20.0",
     "tslint-config-prettier": "^1.18.0",
     "typescript": "^3.6.3",
