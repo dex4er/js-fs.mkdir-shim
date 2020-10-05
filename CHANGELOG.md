@@ -1,5 +1,9 @@
 # Changelog
 
+## v1.1.2 2020-10-05
+
+- Fix tests on newer Node.
+
 ## v1.1.1 2019-10-07
 
 - Updated dependencies.

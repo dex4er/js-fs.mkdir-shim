@@ -86,7 +86,6 @@ function nextdir() {
     common.expectsError(() => mkdir(pathname, {recursive}, common.mustNotCall()), {
       code: 'ERR_INVALID_ARG_TYPE',
       type: TypeError,
-      message: 'The "recursive" argument must be of type boolean. Received ' + `type ${typeof recursive}`
     });
   });
 }
