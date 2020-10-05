@@ -4,6 +4,7 @@ import * as fs from 'fs';
 
 /**
  * Asynchronous mkdir(2) - create a directory.
+ *
  * @param path A path to a file. If a URL is provided, it must use the `file:` protocol.
  * @param mode A file mode. If a string is passed, it is parsed as an octal integer. If not specified, defaults to `0o777`.
  */
@@ -15,6 +16,7 @@ declare function mkdir(
 
 /**
  * Asynchronous mkdir(2) - create a directory with a mode of `0o777`.
+ *
  * @param path A path to a file. If a URL is provided, it must use the `file:` protocol.
  */
 declare function mkdir(path: fs.PathLike, callback: (err: NodeJS.ErrnoException | null) => void): void;
@@ -23,6 +25,7 @@ declare function mkdir(path: fs.PathLike, callback: (err: NodeJS.ErrnoException 
 declare namespace mkdir {
   /**
    * Asynchronous mkdir(2) - create a directory.
+   *
    * @param path A path to a file. If a URL is provided, it must use the `file:` protocol.
    * @param mode A file mode. If a string is passed, it is parsed as an octal integer. If not specified, defaults to `0o777`.
    */

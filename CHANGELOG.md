@@ -3,6 +3,7 @@
 ## v1.1.2 2020-10-05
 
 - Fix tests on newer Node.
+- Converted from tslint to eslint.
 
 ## v1.1.1 2019-10-07
 

@@ -21,7 +21,7 @@ function isDeepEqual(actual, expected) {
 function runCallChecks(exitCode) {
   if (exitCode !== 0) return;
 
-  const failed = mustCallChecks.filter(function(context) {
+  const failed = mustCallChecks.filter(function (context) {
     if ('minimum' in context) {
       context.messageSegment = 'at least ' + context.minimum;
       return context.actual < context.minimum;
@@ -31,19 +31,14 @@ function runCallChecks(exitCode) {
     }
   });
 
-  failed.forEach(function(context) {
-    console.log(
+  failed.forEach(function (context) {
+    console.info(
       'Mismatched %s function calls. Expected %s, actual %d.',
       context.name,
       context.messageSegment,
       context.actual
     );
-    console.log(
-      context.stack
-        .split('\n')
-        .slice(2)
-        .join('\n')
-    );
+    console.info(context.stack.split('\n').slice(2).join('\n'));
   });
 
   if (failed.length) process.exit(1);
@@ -78,7 +73,7 @@ function _mustCallInner(fn, criteria, field) {
 
   mustCallChecks.push(context);
 
-  return function() {
+  return function () {
     context.actual++;
     return fn.apply(this, arguments);
   };
@@ -187,6 +182,7 @@ function getCallSite(top) {
 
 function mustNotCall(msg) {
   const callSite = getCallSite(mustNotCall);
+  // eslint-disable-next-line no-shadow
   return function mustNotCall() {
     assert.fail(`${msg || 'function should not have been called'} at ${callSite}`);
   };

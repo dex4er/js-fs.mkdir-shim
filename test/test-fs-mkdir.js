@@ -69,9 +69,9 @@ function nextdir() {
     mkdir(
       pathname,
       {recursive: true},
-      common.mustCall(err => {
-        assert.equal(err.code, 'EEXIST');
-        assert.equal(err.syscall, 'mkdir');
+      common.mustCall(err2 => {
+        assert.equal(err2.code, 'EEXIST');
+        assert.equal(err2.syscall, 'mkdir');
         assert.equal(fs.statSync(pathname).isDirectory(), false);
       })
     );
@@ -85,7 +85,7 @@ function nextdir() {
   ['', 1, {}, [], null, Symbol('test'), () => {}].forEach(recursive => {
     common.expectsError(() => mkdir(pathname, {recursive}, common.mustNotCall()), {
       code: 'ERR_INVALID_ARG_TYPE',
-      type: TypeError,
+      type: TypeError
     });
   });
 }
