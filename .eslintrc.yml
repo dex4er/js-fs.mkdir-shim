@@ -74,7 +74,7 @@ overrides:
       '@typescript-eslint/unified-signatures': error
 parser: espree
 parserOptions:
-  ecmaVersion: 2018
+  ecmaVersion: 2015
   sourceType: module
 plugins:
   - '@typescript-eslint'
