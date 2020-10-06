@@ -1,9 +1,10 @@
 # Changelog
 
-## v1.1.2 2020-10-05
+## v1.1.2 2020-10-06
 
 - Fix tests on newer Node.
 - Converted from tslint to eslint.
+- Updated dependencies.
 
 ## v1.1.1 2019-10-07
 
