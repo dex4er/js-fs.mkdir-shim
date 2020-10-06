@@ -1,6 +1,6 @@
 {
   "name": "fs.mkdir-shim",
-  "version": "1.1.2",
+  "version": "2.0.0",
   "description": "Polyfill/shim for fs.mkdir in node versions < v10.12",
   "main": "index.js",
   "typings": "index.d.ts",
