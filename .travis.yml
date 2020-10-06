@@ -9,7 +9,6 @@ jobs:
       env: NPM_PACK=yes NPM_RUN_LINT=yes
     - node_js: '10'
     - node_js: '8'
-    - node_js: '6'
 
 install:
   - set -e

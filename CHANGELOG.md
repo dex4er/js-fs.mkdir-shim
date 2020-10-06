@@ -1,5 +1,11 @@
 # Changelog
 
+## v2.0.0 2020-10-07
+
+- Requires Node >= 8.
+- Returns the path to created directory.
+- Based on typings for Node v14.
+
 ## v1.1.2 2020-10-06
 
 - Fix tests on newer Node.

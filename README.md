@@ -19,7 +19,7 @@ module.
 
 ## Requirements
 
-This module requires Node >= 4.
+This module requires Node >= 6.
 
 This package implements the [es-shim API](https://github.com/es-shims/api)
 interface. It works in an ES6-supported environment and complies with the
